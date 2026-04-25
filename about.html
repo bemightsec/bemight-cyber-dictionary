@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>About | BeMight Cyber Dictionary</title>
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    .about-hero {
+      background: linear-gradient(135deg, #dc2626, #7f1d1d, #111827);
+      color: white;
+      border-radius: 32px;
+      padding: 42px;
+    }
+
+    .about-hero span {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .about-hero h2 {
+      margin-top: 20px;
+      font-size: 48px;
+      line-height: 1.1;
+      max-width: 900px;
+    }
+
+    .about-hero p {
+      margin-top: 18px;
+      color: #fee2e2;
+      line-height: 1.8;
+      max-width: 850px;
+      font-size: 17px;
+    }
+
+    .about-grid {
+      margin-top: 28px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .about-card {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 28px;
+      padding: 28px;
+    }
+
+    .about-card.full {
+      grid-column: 1 / -1;
+    }
+
+    .about-card h3 {
+      font-size: 28px;
+      color: #111827;
+    }
+
+    .about-card p {
+      margin-top: 12px;
+      color: #4b5563;
+      line-height: 1.8;
+    }
+
+    .highlight-card {
+      background: #dc2626;
+      color: white;
+      border: none;
+    }
+
+    .highlight-card h3 {
+      color: white;
+    }
+
+    .highlight-card p {
+      color: #fee2e2;
+    }
+
+    .dark-card {
+      background: #111827;
+      color: white;
+      border: none;
+    }
+
+    .dark-card h3 {
+      color: white;
+    }
+
+    .dark-card p {
+      color: #d1d5db;
+    }
+
+    .creator-box {
+      margin-top: 18px;
+      background: #f9fafb;
+      border-radius: 22px;
+      padding: 22px;
+    }
+
+    .creator-box p {
+      margin-top: 8px;
+      color: #4b5563;
+      font-weight: 700;
+    }
+
+    .creator-box strong {
+      color: #111827;
+    }
+
+    .feature-list {
+      margin-top: 18px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .feature-item {
+      background: #f9fafb;
+      border-radius: 16px;
+      padding: 16px;
+      color: #4b5563;
+      line-height: 1.6;
+      font-weight: 700;
+    }
+
+    .cta-box {
+      margin-top: 28px;
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 28px;
+      padding: 30px;
+      text-align: center;
+    }
+
+    .cta-box h3 {
+      font-size: 30px;
+      color: #111827;
+    }
+
+    .cta-box p {
+      margin: 12px auto 0;
+      color: #6b7280;
+      line-height: 1.7;
+      max-width: 700px;
+    }
+
+    .cta-actions {
+      margin-top: 22px;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .cta-actions a {
+      text-decoration: none;
+      background: #dc2626;
+      color: white;
+      padding: 14px 20px;
+      border-radius: 14px;
+      font-weight: 900;
+    }
+
+    .cta-actions a.secondary {
+      background: #111827;
+    }
+
+    @media (max-width: 768px) {
+      .about-hero {
+        padding: 28px;
+      }
+
+      .about-hero h2 {
+        font-size: 34px;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-card.full {
+        grid-column: auto;
+      }
+
+      .about-card {
+        padding: 24px;
+      }
+
+      .about-card h3,
+      .cta-box h3 {
+        font-size: 25px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <a href="index.html" class="brand">
+      <div class="brand-icon">🛡️</div>
+
+      <div>
+        <h1>BeMight Cyber Dictionary</h1>
+        <p>Cybersecurity made simple</p>
+      </div>
+    </a>
+
+    <button class="menu-btn" id="menuBtn">☰</button>
+
+    <nav class="nav-menu" id="navMenu">
+      <a href="index.html">Home</a>
+      <a href="dictionary.html">Dictionary</a>
+      <a href="learn.html">Learn</a>
+      <a href="quiz.html">Quiz</a>
+      <a href="saved.html">Saved</a>
+      <a href="about.html" class="active">About</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="about-hero">
+      <span>About the Project</span>
+
+      <h2>Making cybersecurity simple, practical, and beginner-friendly.</h2>
+
+      <p>
+        BeMight Cyber Dictionary is a beginner-friendly cybersecurity learning app created
+        to help students, small business owners, and everyday internet users understand
+        cybersecurity terms, threats, tools, and protection methods in simple language.
+      </p>
+    </section>
+
+    <section class="about-grid">
+
+      <div class="about-card">
+        <h3>What is BeMight Cyber Dictionary?</h3>
+
+        <p>
+          BeMight Cyber Dictionary is a learning platform that explains cybersecurity words
+          and concepts in a way beginners can understand. Instead of using only complex
+          technical definitions, the app gives simple meanings, real-life examples, and
+          practical safety tips.
+        </p>
+      </div>
+
+      <div class="about-card">
+        <h3>Who is it for?</h3>
+
+        <p>
+          This app is designed for cybersecurity beginners, students, small business owners,
+          workers, and everyday internet users who want to understand digital safety without
+          feeling overwhelmed by technical jargon.
+        </p>
+      </div>
+
+      <div class="about-card highlight-card">
+        <h3>Mission</h3>
+
+        <p>
+          To make cybersecurity education simple, practical, and accessible for beginners by
+          explaining important concepts with real-life examples, quizzes, and clear safety tips.
+        </p>
+      </div>
+
+      <div class="about-card dark-card">
+        <h3>Vision</h3>
+
+        <p>
+          To become a trusted beginner cybersecurity learning companion for students,
+          communities, small businesses, and organizations that want to build better
+          digital safety awareness.
+        </p>
+      </div>
+
+      <div class="about-card full">
+        <h3>About BeMight Security</h3>
+
+        <p>
+          BeMight Security focuses on cybersecurity awareness, beginner-friendly tech education,
+          digital safety, and practical learning. The goal is to help people understand how to
+          use technology safely and confidently.
+        </p>
+
+        <div class="creator-box">
+          <p><strong>Created by:</strong> Prince Awuku Anobaah</p>
+          <p><strong>Brand:</strong> BeMight Security</p>
+          <p><strong>Focus:</strong> Cybersecurity education, awareness, and beginner learning</p>
+        </div>
+      </div>
+
+      <div class="about-card full">
+        <h3>What the App Includes</h3>
+
+        <div class="feature-list">
+          <div class="feature-item">📚 Cybersecurity dictionary with simple and technical meanings</div>
+          <div class="feature-item">🔍 Search suggestions for beginners who may not know the correct spelling</div>
+          <div class="feature-item">⭐ Saved terms for reviewing important cybersecurity words later</div>
+          <div class="feature-item">🎓 Learning paths for step-by-step cybersecurity education</div>
+          <div class="feature-item">🧠 Random quizzes to test and improve cybersecurity knowledge</div>
+          <div class="feature-item">🛡️ Practical online safety tips for everyday users</div>
+        </div>
+      </div>
+
+      <div class="about-card full">
+        <h3>Important Safety Note</h3>
+
+        <p>
+          This app is for defensive cybersecurity education and awareness only. It is designed
+          to help people understand threats, protect themselves, and build safe digital habits.
+          It does not teach hacking, malware creation, password stealing, or illegal activity.
+        </p>
+      </div>
+
+    </section>
+
+    <section class="cta-box">
+      <h3>Continue Learning</h3>
+
+      <p>
+        Explore cybersecurity terms, take beginner quizzes, or follow the learning paths to
+        build your confidence step by step.
+      </p>
+
+      <div class="cta-actions">
+        <a href="dictionary.html">Open Dictionary</a>
+        <a href="learn.html" class="secondary">Start Learning</a>
+        <a href="quiz.html">Take Quiz</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>© 2026 BeMight Security. Cybersecurity made simple for beginners.</p>
+  </footer>
+
+  <script src="about.js"></script>
+</body>
+</html>
