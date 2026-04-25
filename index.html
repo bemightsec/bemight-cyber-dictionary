@@ -300,15 +300,12 @@
     }
 
     .community-section {
-      margin-top: 28px;
+      margin-top: 32px;
       background: white;
       border: 1px solid #e5e7eb;
-      border-radius: 32px;
-      padding: 34px;
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 28px;
-      align-items: center;
+      border-radius: 28px;
+      padding: 30px;
+      text-align: center;
     }
 
     .community-label {
@@ -323,22 +320,24 @@
     }
 
     .community-section h2 {
-      margin-top: 16px;
-      font-size: 38px;
-      line-height: 1.2;
+      margin: 16px auto 0;
+      font-size: 32px;
+      line-height: 1.25;
       color: #111827;
+      max-width: 800px;
     }
 
     .community-section p {
-      margin-top: 14px;
+      margin: 14px auto 0;
       color: #4b5563;
       line-height: 1.8;
-      max-width: 750px;
+      max-width: 760px;
     }
 
     .community-buttons {
       margin-top: 22px;
       display: flex;
+      justify-content: center;
       gap: 12px;
       flex-wrap: wrap;
     }
@@ -362,29 +361,6 @@
       color: #dc2626;
     }
 
-    .community-card {
-      background: linear-gradient(135deg, #111827, #7f1d1d);
-      color: white;
-      border-radius: 26px;
-      padding: 26px;
-    }
-
-    .community-card h3 {
-      font-size: 26px;
-    }
-
-    .community-card ul {
-      margin-top: 16px;
-      padding-left: 20px;
-    }
-
-    .community-card li {
-      margin-top: 10px;
-      color: #fee2e2;
-      line-height: 1.6;
-      font-weight: 700;
-    }
-
     footer {
       text-align: center;
       padding: 30px 6%;
@@ -392,8 +368,7 @@
     }
 
     @media (max-width: 900px) {
-      .hero,
-      .community-section {
+      .hero {
         grid-template-columns: 1fr;
       }
 
@@ -446,14 +421,6 @@
         font-size: 36px;
       }
 
-      .community-section {
-        padding: 26px;
-      }
-
-      .community-section h2 {
-        font-size: 30px;
-      }
-
       .search-box {
         flex-direction: column;
       }
@@ -465,6 +432,14 @@
       .stats-grid,
       .features-grid {
         grid-template-columns: 1fr;
+      }
+
+      .community-section {
+        padding: 24px;
+      }
+
+      .community-section h2 {
+        font-size: 27px;
       }
 
       .community-buttons a {
@@ -580,34 +555,20 @@
     </section>
 
     <section class="community-section">
-      <div>
-        <span class="community-label">Join the Community</span>
+      <span class="community-label">Connect With BeMight Security</span>
 
-        <h2>Get cyber news, safety tips, and beginner support from BeMight Security.</h2>
+      <h2>Get simple cyber news, scam alerts, and beginner support.</h2>
 
-        <p>
-          Join the BeMight Security community for simple cybersecurity updates,
-          scam alerts, beginner learning support, and practical online safety tips.
-          You can also ask questions when you need help understanding a topic.
-        </p>
+      <p>
+        Join the BeMight Security community for cybersecurity updates, online safety tips,
+        and beginner-friendly support. You can also ask a question when you need help
+        understanding a topic.
+      </p>
 
-        <div class="community-buttons">
-          <a href="#" target="_blank">Join WhatsApp Channel</a>
-          <a href="#" target="_blank" class="dark">Follow Our Page</a>
-          <a href="#" target="_blank" class="light">Read Cyber News</a>
-          <a href="#" target="_blank" class="dark">Ask a Question</a>
-        </div>
-      </div>
-
-      <div class="community-card">
-        <h3>What you’ll get</h3>
-
-        <ul>
-          <li>Simple cybersecurity news and scam alerts</li>
-          <li>Beginner-friendly explanations and learning tips</li>
-          <li>Updates on new dictionary terms and quiz questions</li>
-          <li>Support for students and everyday internet users</li>
-        </ul>
+      <div class="community-buttons">
+        <a href="YOUR_WHATSAPP_CHANNEL_LINK" target="_blank">Join WhatsApp Channel</a>
+        <a href="YOUR_CYBER_NEWS_LINK" target="_blank" class="dark">Read Cyber News</a>
+        <a href="mailto:mysec@gmail.com" class="light">Ask a Question</a>
       </div>
     </section>
   </main>
