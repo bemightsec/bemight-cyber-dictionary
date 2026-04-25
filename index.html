@@ -10,6 +10,7 @@
 </head>
 <body>
 
+  <!-- HEADER / NAVIGATION -->
   <header class="app-header">
     <div class="logo-area">
       <div class="logo-icon">🛡️</div>
@@ -47,7 +48,11 @@
           </p>
 
           <div class="search-box">
-            <input type="text" id="homeSearchInput" placeholder="Search: phishing, malware, VPN, SOC..." />
+            <input
+              type="text"
+              id="homeSearchInput"
+              placeholder="Search: phishing, malware, VPN, SOC..."
+            />
             <button id="homeSearchBtn">Search</button>
           </div>
 
@@ -114,7 +119,11 @@
         </p>
 
         <div class="dictionary-search">
-          <input type="text" id="dictionarySearch" placeholder="Search for a term..." />
+          <input
+            type="text"
+            id="dictionarySearch"
+            placeholder="Search for a term..."
+          />
         </div>
 
         <div class="category-buttons" id="categoryButtons">
@@ -132,25 +141,20 @@
       <section class="terms-grid" id="termsGrid"></section>
     </section>
 
-   <!-- SAVED TERMS PAGE -->
-<section class="page" id="savedPage">
-  <section class="page-header">
-    <span class="section-tag">Saved Terms</span>
-    <h2>Your Saved Cybersecurity Terms</h2>
-    <p>
-      Terms you save from the dictionary will appear here. This helps you review
-      important cybersecurity words later.
-    </p>
-  </section>
+    <!-- SAVED TERMS PAGE -->
+    <section class="page" id="savedPage">
+      <section class="page-header">
+        <span class="section-tag">Saved Terms</span>
+        <h2>Your Saved Cybersecurity Terms</h2>
+        <p>
+          Terms you save from the dictionary will appear here. This helps you review
+          important cybersecurity words later.
+        </p>
+      </section>
 
-  <section class="terms-grid" id="savedTermsGrid"></section>
-</section>
-  </section>
+      <section class="terms-grid" id="savedTermsGrid"></section>
+    </section>
 
-  <section class="terms-grid" id="savedTermsGrid"></section>
-</section>
-
-    
     <!-- COMING SOON PAGE -->
     <section class="page" id="comingSoonPage">
       <section class="coming-soon">
@@ -171,6 +175,7 @@
       <button class="close-modal" id="closeModal">×</button>
 
       <span class="modal-category" id="modalCategory"></span>
+
       <h2 id="modalTerm"></h2>
 
       <div class="modal-section">
@@ -195,16 +200,18 @@
 
       <div class="modal-section">
         <h3>Related Terms</h3>
-        <button class="save-modal-btn" id="modalSaveBtn">Save Term</button>
         <div class="related-list" id="modalRelated"></div>
       </div>
+
+      <button class="save-modal-btn" id="modalSaveBtn">Save Term</button>
     </div>
   </div>
 
+  <!-- FOOTER -->
   <footer>
     <p>© 2026 BeMight Security. Cybersecurity made simple for beginners.</p>
   </footer>
 
   <script src="app.js"></script>
 </body>
-  </html>
+</html>
