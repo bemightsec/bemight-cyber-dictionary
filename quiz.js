@@ -98,7 +98,6 @@ const questionBank = [
     answer: "Systems and data are accessible when needed",
     explanation: "Availability means authorized users can access systems and information when needed."
   },
-
   {
     category: "Attacks",
     question: "What is phishing?",
@@ -160,19 +159,6 @@ const questionBank = [
     explanation: "Social engineering manipulates people instead of attacking technology directly."
   },
   {
-    category: "Attacks",
-    question: "What is a fake login page often used for?",
-    options: [
-      "Stealing usernames and passwords",
-      "Making a laptop faster",
-      "Printing documents",
-      "Charging a phone"
-    ],
-    answer: "Stealing usernames and passwords",
-    explanation: "Fake login pages may look real but are created to capture login details."
-  },
-
-  {
     category: "Protection",
     question: "What is MFA?",
     options: [
@@ -233,19 +219,6 @@ const questionBank = [
     explanation: "Always verify suspicious links and messages before interacting with them."
   },
   {
-    category: "Protection",
-    question: "Why should software updates not be ignored?",
-    options: [
-      "They often fix security weaknesses",
-      "They delete all apps",
-      "They always make devices unsafe",
-      "They remove internet access"
-    ],
-    answer: "They often fix security weaknesses",
-    explanation: "Updates often patch vulnerabilities that attackers could abuse."
-  },
-
-  {
     category: "Networking",
     question: "What is an IP address?",
     options: [
@@ -293,7 +266,6 @@ const questionBank = [
     answer: "It may expose users to privacy and security risks",
     explanation: "Public Wi-Fi can be risky, especially when used for sensitive accounts without protection."
   },
-
   {
     category: "Tools",
     question: "What is antivirus software used for?",
@@ -342,7 +314,6 @@ const questionBank = [
     answer: "Creating a protected connection through a private tunnel",
     explanation: "A VPN can help protect traffic, especially on untrusted networks, but it does not replace safe habits."
   },
-
   {
     category: "Careers",
     question: "What does a SOC team do?",
@@ -379,7 +350,6 @@ const questionBank = [
     answer: "It helps explain findings clearly",
     explanation: "Good documentation helps teams understand what happened and what actions were taken."
   },
-
   {
     category: "Acronyms",
     question: "What does MFA stand for?",
@@ -435,7 +405,17 @@ menuBtn.addEventListener("click", () => {
 });
 
 function shuffleArray(array) {
-  return [...array].sort(() => Math.random() - 0.5);
+  const shuffled = [...array];
+
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const randomIndex = Math.floor(Math.random() * (i + 1));
+
+    const temporaryValue = shuffled[i];
+    shuffled[i] = shuffled[randomIndex];
+    shuffled[randomIndex] = temporaryValue;
+  }
+
+  return shuffled;
 }
 
 function getFilteredQuestions() {
@@ -472,6 +452,7 @@ function startQuiz() {
 
 function renderQuestion() {
   const currentQuestion = currentQuestions[currentQuestionIndex];
+  const optionLetters = ["A", "B", "C", "D"];
 
   questionCounter.textContent = `Question ${currentQuestionIndex + 1} of ${currentQuestions.length}`;
   quizScore.textContent = `Score: ${score}`;
@@ -481,10 +462,11 @@ function renderQuestion() {
   feedbackBox.classList.remove("show");
   optionsGrid.innerHTML = "";
 
-  currentQuestion.options.forEach(option => {
+  currentQuestion.options.forEach((option, index) => {
     const button = document.createElement("button");
     button.className = "option-btn";
-    button.textContent = option;
+    button.dataset.option = option;
+    button.innerHTML = `<strong>${optionLetters[index]}.</strong> ${option}`;
 
     button.addEventListener("click", () => {
       checkAnswer(button, option);
@@ -501,7 +483,7 @@ function checkAnswer(selectedButton, selectedOption) {
   optionButtons.forEach(button => {
     button.disabled = true;
 
-    if (button.textContent === currentQuestion.answer) {
+    if (button.dataset.option === currentQuestion.answer) {
       button.classList.add("correct");
     }
   });
@@ -545,11 +527,14 @@ function finishQuiz() {
   const percentage = Math.round((score / currentQuestions.length) * 100);
 
   if (percentage >= 80) {
-    resultMessage.textContent = "Excellent work. You are building strong beginner cybersecurity knowledge.";
+    resultMessage.textContent =
+      "Excellent work. You are building strong beginner cybersecurity knowledge.";
   } else if (percentage >= 50) {
-    resultMessage.textContent = "Good effort. Review the explanations and try another quiz to improve.";
+    resultMessage.textContent =
+      "Good effort. Review the explanations and try another quiz to improve.";
   } else {
-    resultMessage.textContent = "Keep learning. Cybersecurity takes practice, and every attempt helps you improve.";
+    resultMessage.textContent =
+      "Keep learning. Cybersecurity takes practice, and every attempt helps you improve.";
   }
 
   saveQuizHistory(percentage);
@@ -570,17 +555,15 @@ function saveQuizHistory(percentage) {
   renderQuizHistory();
 }
 
-function restartSameQuiz() {
+function restartSameSetup() {
   quizResult.classList.remove("show");
+  quizBox.classList.remove("show");
   quizSetup.style.display = "block";
-  startQuiz();
 }
 
-function randomQuiz() {
+function tryAnotherRandomQuiz() {
   quizCategory.value = "Mixed";
   questionCount.value = "5";
-  quizResult.classList.remove("show");
-  quizSetup.style.display = "block";
   startQuiz();
 }
 
@@ -625,8 +608,8 @@ function clearHistory() {
 
 startQuizBtn.addEventListener("click", startQuiz);
 nextQuestionBtn.addEventListener("click", nextQuestion);
-restartQuizBtn.addEventListener("click", restartSameQuiz);
-randomQuizBtn.addEventListener("click", randomQuiz);
+restartQuizBtn.addEventListener("click", restartSameSetup);
+randomQuizBtn.addEventListener("click", tryAnotherRandomQuiz);
 clearHistoryBtn.addEventListener("click", clearHistory);
 
 renderQuizHistory();
