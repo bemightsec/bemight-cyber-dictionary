@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Learn | BeMight Cyber Dictionary</title>
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    .page-header {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 28px;
+      padding: 32px;
+    }
+
+    .page-header span {
+      display: inline-block;
+      background: #fee2e2;
+      color: #dc2626;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .page-header h2 {
+      margin-top: 16px;
+      font-size: 42px;
+      color: #111827;
+    }
+
+    .page-header p {
+      margin-top: 12px;
+      color: #6b7280;
+      line-height: 1.7;
+      max-width: 850px;
+    }
+
+    .learning-grid {
+      margin-top: 28px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .learning-card {
+      background: white;
+      padding: 24px;
+      border-radius: 24px;
+      border: 1px solid #e5e7eb;
+      transition: 0.2s ease;
+    }
+
+    .learning-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 35px rgba(0,0,0,0.08);
+    }
+
+    .level-tag {
+      display: inline-block;
+      background: #fee2e2;
+      color: #dc2626;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .learning-card h3 {
+      margin-top: 16px;
+      font-size: 24px;
+      color: #111827;
+    }
+
+    .learning-card p {
+      margin-top: 10px;
+      color: #6b7280;
+      line-height: 1.6;
+    }
+
+    .lesson-count {
+      margin-top: 14px;
+      font-weight: 900;
+      color: #dc2626;
+    }
+
+    .progress-bar {
+      margin-top: 16px;
+      height: 10px;
+      background: #e5e7eb;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: #dc2626;
+      width: 0%;
+    }
+
+    .progress-text {
+      margin-top: 8px;
+      font-size: 14px;
+      font-weight: 800;
+      color: #6b7280;
+    }
+
+    .learning-card button {
+      margin-top: 18px;
+      border: none;
+      background: #dc2626;
+      color: white;
+      padding: 13px 18px;
+      border-radius: 14px;
+      font-weight: 900;
+    }
+
+    .lesson-detail {
+      display: none;
+      margin-top: 28px;
+      background: white;
+      padding: 30px;
+      border-radius: 28px;
+      border: 1px solid #e5e7eb;
+    }
+
+    .lesson-detail.show {
+      display: block;
+    }
+
+    .back-btn {
+      border: none;
+      background: #111827;
+      color: white;
+      padding: 13px 18px;
+      border-radius: 14px;
+      font-weight: 900;
+    }
+
+    .lesson-top {
+      margin-top: 24px;
+    }
+
+    .lesson-top span {
+      display: inline-block;
+      background: #fee2e2;
+      color: #dc2626;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .lesson-top h2 {
+      margin-top: 16px;
+      font-size: 38px;
+      color: #111827;
+    }
+
+    .lesson-top p {
+      margin-top: 12px;
+      color: #6b7280;
+      line-height: 1.7;
+      max-width: 850px;
+    }
+
+    .lesson-content-box {
+      margin-top: 24px;
+      background: #f9fafb;
+      padding: 22px;
+      border-radius: 22px;
+    }
+
+    .lesson-content-box h3 {
+      color: #111827;
+      margin-top: 20px;
+    }
+
+    .lesson-content-box h3:first-child {
+      margin-top: 0;
+    }
+
+    .lesson-content-box p,
+    .lesson-content-box li {
+      color: #4b5563;
+      line-height: 1.8;
+    }
+
+    .lesson-content-box ul {
+      margin-top: 10px;
+      padding-left: 22px;
+    }
+
+    .lesson-actions {
+      margin-top: 22px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .lesson-actions button {
+      border: none;
+      color: white;
+      padding: 13px 18px;
+      border-radius: 14px;
+      font-weight: 900;
+    }
+
+    #prevLessonBtn {
+      background: #111827;
+    }
+
+    #markCompleteBtn {
+      background: #16a34a;
+    }
+
+    #nextLessonBtn {
+      background: #dc2626;
+    }
+
+    .lesson-actions button:disabled {
+      background: #9ca3af !important;
+      cursor: not-allowed;
+    }
+
+    @media (max-width: 900px) {
+      .learning-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .page-header {
+        padding: 24px;
+      }
+
+      .page-header h2 {
+        font-size: 32px;
+      }
+
+      .learning-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .lesson-detail {
+        padding: 24px;
+      }
+
+      .lesson-top h2 {
+        font-size: 30px;
+      }
+
+      .lesson-actions {
+        flex-direction: column;
+      }
+
+      .lesson-actions button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <a href="index.html" class="brand">
+      <div class="brand-icon">🛡️</div>
+
+      <div>
+        <h1>BeMight Cyber Dictionary</h1>
+        <p>Cybersecurity made simple</p>
+      </div>
+    </a>
+
+    <button class="menu-btn" id="menuBtn">☰</button>
+
+    <nav class="nav-menu" id="navMenu">
+      <a href="index.html">Home</a>
+      <a href="dictionary.html">Dictionary</a>
+      <a href="learn.html" class="active">Learn</a>
+      <a href="#">Quiz</a>
+      <a href="saved.html">Saved</a>
+      <a href="#">About</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-header">
+      <span>Learning Paths</span>
+
+      <h2>Start Learning Cybersecurity</h2>
+
+      <p>
+        Follow beginner-friendly learning paths to understand cybersecurity step by step.
+        Each path contains short lessons, simple explanations, and key points.
+      </p>
+    </section>
+
+    <section class="learning-grid" id="learningGrid"></section>
+
+    <section class="lesson-detail" id="lessonDetail">
+      <button class="back-btn" id="backToPathsBtn">← Back to Learning Paths</button>
+
+      <div class="lesson-top">
+        <span id="lessonPathLabel">Learning Path</span>
+        <h2 id="lessonTitle">Lesson Title</h2>
+        <p id="lessonIntro">Lesson introduction appears here.</p>
+      </div>
+
+      <div class="lesson-content-box">
+        <h3>Lesson Content</h3>
+        <p id="lessonContent"></p>
+
+        <h3>Key Points</h3>
+        <ul id="lessonKeyPoints"></ul>
+      </div>
+
+      <div class="lesson-actions">
+        <button id="prevLessonBtn">Previous Lesson</button>
+        <button id="markCompleteBtn">Mark as Complete</button>
+        <button id="nextLessonBtn">Next Lesson</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 BeMight Security. Cybersecurity made simple for beginners.</p>
+  </footer>
+
+  <script src="learn.js"></script>
+</body>
+</html>
