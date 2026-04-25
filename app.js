@@ -13,7 +13,7 @@ navLinks.forEach(link => {
   const text = link.textContent.trim().toLowerCase();
 
   if (text === "dictionary") link.href = "dictionary.html";
-  if (text === "learn") link.href = "#";
+  if (text === "learn") link.href = "learn.html";
   if (text === "quiz") link.href = "#";
  if (text === "saved") link.href = "saved.html";
   if (text === "about") link.href = "#";
@@ -141,7 +141,7 @@ openDictionaryBtn.addEventListener("click", () => {
 });
 
 startLearningBtn.addEventListener("click", () => {
-  alert("Learning page will be built after the Dictionary page.");
+  window.location.href = "learn.html";
 });
 
 termOfDayBtn.addEventListener("click", () => {
