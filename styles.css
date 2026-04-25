@@ -564,3 +564,56 @@ footer {
     font-size: 30px;
   }
   }
+.term-actions {
+  margin-top: 18px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.term-actions button {
+  margin-top: 0;
+}
+
+.save-btn {
+  background: #dc2626 !important;
+}
+
+.save-btn.saved {
+  background: #16a34a !important;
+}
+
+.save-modal-btn {
+  width: 100%;
+  margin-top: 20px;
+  border: none;
+  background: #dc2626;
+  color: white;
+  padding: 15px 20px;
+  border-radius: 16px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.save-modal-btn.saved {
+  background: #16a34a;
+}
+
+.empty-state {
+  background: white;
+  border: 1px solid #e5e7eb;
+  padding: 40px;
+  border-radius: 28px;
+  text-align: center;
+}
+
+.empty-state h3 {
+  font-size: 28px;
+  color: #111827;
+}
+
+.empty-state p {
+  margin-top: 10px;
+  color: #6b7280;
+  line-height: 1.7;
+}
