@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Saved Terms | BeMight Cyber Dictionary</title>
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    .page-header {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 28px;
+      padding: 32px;
+    }
+
+    .page-header span {
+      display: inline-block;
+      background: #fee2e2;
+      color: #dc2626;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .page-header h2 {
+      margin-top: 16px;
+      font-size: 42px;
+      color: #111827;
+    }
+
+    .page-header p {
+      margin-top: 12px;
+      color: #6b7280;
+      line-height: 1.7;
+      max-width: 800px;
+    }
+
+    .saved-actions {
+      margin-top: 20px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .saved-actions a,
+    .saved-actions button {
+      border: none;
+      text-decoration: none;
+      background: #dc2626;
+      color: white;
+      padding: 13px 18px;
+      border-radius: 14px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .saved-actions button {
+      background: #111827;
+    }
+
+    .terms-grid {
+      margin-top: 28px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .term-card {
+      background: white;
+      padding: 24px;
+      border-radius: 24px;
+      border: 1px solid #e5e7eb;
+      transition: 0.2s ease;
+    }
+
+    .term-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 35px rgba(0,0,0,0.08);
+    }
+
+    .term-category {
+      display: inline-block;
+      background: #fee2e2;
+      color: #dc2626;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .term-card h3 {
+      margin-top: 16px;
+      font-size: 24px;
+      color: #111827;
+    }
+
+    .term-card p {
+      margin-top: 10px;
+      color: #6b7280;
+      line-height: 1.6;
+    }
+
+    .term-actions {
+      margin-top: 18px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .term-actions button {
+      border: none;
+      color: white;
+      padding: 12px 16px;
+      border-radius: 14px;
+      font-weight: 900;
+    }
+
+    .view-btn {
+      background: #111827;
+    }
+
+    .remove-btn {
+      background: #dc2626;
+    }
+
+    .empty-state {
+      background: white;
+      border: 1px solid #e5e7eb;
+      padding: 45px;
+      border-radius: 28px;
+      text-align: center;
+      grid-column: 1 / -1;
+    }
+
+    .empty-state h3 {
+      font-size: 30px;
+      color: #111827;
+    }
+
+    .empty-state p {
+      margin: 12px auto 0;
+      color: #6b7280;
+      line-height: 1.7;
+      max-width: 600px;
+    }
+
+    .empty-state a {
+      display: inline-block;
+      margin-top: 20px;
+      background: #dc2626;
+      color: white;
+      text-decoration: none;
+      padding: 14px 20px;
+      border-radius: 14px;
+      font-weight: 900;
+    }
+
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(17, 24, 39, 0.65);
+      z-index: 500;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .modal-overlay.show {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-box {
+      background: white;
+      width: 100%;
+      max-width: 760px;
+      border-radius: 28px;
+      padding: 30px;
+      position: relative;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      border: none;
+      background: #f3f4f6;
+      color: #111827;
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      font-size: 26px;
+    }
+
+    .modal-category {
+      display: inline-block;
+      background: #fee2e2;
+      color: #dc2626;
+      padding: 7px 13px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .modal-box h2 {
+      margin-top: 16px;
+      font-size: 36px;
+    }
+
+    .modal-section {
+      margin-top: 18px;
+      background: #f9fafb;
+      padding: 18px;
+      border-radius: 18px;
+    }
+
+    .modal-section h3 {
+      color: #111827;
+      margin-bottom: 8px;
+    }
+
+    .modal-section p,
+    .modal-section li {
+      color: #4b5563;
+      line-height: 1.7;
+    }
+
+    .modal-section ul {
+      padding-left: 20px;
+    }
+
+    .red-soft {
+      background: #fff1f2;
+    }
+
+    .related-list {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .related-list span {
+      background: #e5e7eb;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    @media (max-width: 900px) {
+      .terms-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .page-header {
+        padding: 24px;
+      }
+
+      .page-header h2 {
+        font-size: 32px;
+      }
+
+      .terms-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .modal-overlay.show {
+        align-items: flex-start;
+      }
+
+      .modal-box {
+        padding: 24px;
+      }
+
+      .modal-box h2 {
+        font-size: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <a href="index.html" class="brand">
+      <div class="brand-icon">🛡️</div>
+
+      <div>
+        <h1>BeMight Cyber Dictionary</h1>
+        <p>Cybersecurity made simple</p>
+      </div>
+    </a>
+
+    <button class="menu-btn" id="menuBtn">☰</button>
+
+    <nav class="nav-menu" id="navMenu">
+      <a href="index.html">Home</a>
+      <a href="dictionary.html">Dictionary</a>
+      <a href="#">Learn</a>
+      <a href="#">Quiz</a>
+      <a href="saved.html" class="active">Saved</a>
+      <a href="#">About</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-header">
+      <span>Saved Terms</span>
+
+      <h2>Your Saved Cybersecurity Terms</h2>
+
+      <p>
+        Terms you save from the Dictionary page will appear here. This helps you
+        review important cybersecurity words later.
+      </p>
+
+      <div class="saved-actions">
+        <a href="dictionary.html">Open Dictionary</a>
+        <button id="clearSavedBtn">Clear All Saved Terms</button>
+      </div>
+    </section>
+
+    <section class="terms-grid" id="savedTermsGrid"></section>
+  </main>
+
+  <div class="modal-overlay" id="termModal">
+    <div class="modal-box">
+      <button class="close-modal" id="closeModal">×</button>
+
+      <span class="modal-category" id="modalCategory"></span>
+
+      <h2 id="modalTerm"></h2>
+
+      <div class="modal-section">
+        <h3>Simple Meaning</h3>
+        <p id="modalSimple"></p>
+      </div>
+
+      <div class="modal-section">
+        <h3>Technical Meaning</h3>
+        <p id="modalTechnical"></p>
+      </div>
+
+      <div class="modal-section red-soft">
+        <h3>Real-Life Example</h3>
+        <p id="modalExample"></p>
+      </div>
+
+      <div class="modal-section">
+        <h3>How to Stay Safe</h3>
+        <ul id="modalSafety"></ul>
+      </div>
+
+      <div class="modal-section">
+        <h3>Related Terms</h3>
+        <div class="related-list" id="modalRelated"></div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2026 BeMight Security. Cybersecurity made simple for beginners.</p>
+  </footer>
+
+  <script src="saved.js"></script>
+</body>
+</html>
