@@ -10,242 +10,118 @@
 </head>
 <body>
 
-  <header class="app-header">
-    <div class="logo-area">
-      <div class="logo-icon">🛡️</div>
+  <!-- HEADER -->
+  <header class="site-header">
+    <a href="index.html" class="brand">
+      <div class="brand-icon">🛡️</div>
+
       <div>
         <h1>BeMight Cyber Dictionary</h1>
         <p>Cybersecurity made simple</p>
       </div>
-    </div>
+    </a>
 
     <button class="menu-btn" id="menuBtn">☰</button>
 
     <nav class="nav-menu" id="navMenu">
-      <a href="#" class="nav-link active" data-page="home">Home</a>
-      <a href="#" class="nav-link" data-page="dictionary">Dictionary</a>
-      <a href="#" class="nav-link" data-page="learn">Learn</a>
-      <a href="#" class="nav-link" data-page="quiz">Quiz</a>
-      <a href="#" class="nav-link" data-page="saved">Saved</a>
-      <a href="#" class="nav-link" data-page="about">About</a>
+      <a href="index.html" class="active">Home</a>
+      <a href="#">Dictionary</a>
+      <a href="#">Learn</a>
+      <a href="#">Quiz</a>
+      <a href="#">Saved</a>
+      <a href="#">About</a>
     </nav>
   </header>
 
+  <!-- MAIN CONTENT -->
   <main>
 
-    <!-- HOME PAGE -->
-    <section class="page active" id="homePage">
-      <section class="hero">
-        <div class="hero-content">
-          <span class="tag">Beginner Cybersecurity Learning App</span>
+    <!-- HERO SECTION -->
+    <section class="hero">
+      <div class="hero-text">
+        <span class="small-label">Beginner Cybersecurity Learning App</span>
 
-          <h2>Learn Cybersecurity Terms in Simple Language.</h2>
+        <h2>Learn Cybersecurity Terms in Simple Language.</h2>
 
-          <p>
-            A beginner-friendly cybersecurity dictionary and learning app for students,
-            small business owners, and everyday internet users.
-          </p>
-
-          <div class="search-box">
-            <input
-              type="text"
-              id="homeSearchInput"
-              placeholder="Search: phishing, malware, VPN, SOC..."
-            />
-            <button id="homeSearchBtn">Search</button>
-          </div>
-
-          <div class="hero-buttons">
-            <button id="openDictionaryBtn">Open Dictionary</button>
-            <button class="secondary-btn" id="startLearningBtn">Start Learning</button>
-          </div>
-        </div>
-
-        <div class="hero-card">
-          <p class="card-label">Term of the Day</p>
-          <h3>Phishing</h3>
-          <p>
-            A trick used to make people reveal passwords, money, or private information
-            by pretending to be trusted.
-          </p>
-          <button id="termOfDayBtn">Learn More</button>
-        </div>
-      </section>
-
-      <section class="stats">
-        <div class="stat-card">
-          <h3>20+</h3>
-          <p>Cyber Terms</p>
-        </div>
-
-        <div class="stat-card">
-          <h3>4</h3>
-          <p>Learning Paths</p>
-        </div>
-
-        <div class="stat-card">
-          <h3>Quiz</h3>
-          <p>Coming Soon</p>
-        </div>
-      </section>
-
-      <section class="quick-section">
-        <div class="info-card">
-          <h3>⚠️ Common Threats</h3>
-          <p>Learn about phishing, malware, ransomware, and social engineering.</p>
-        </div>
-
-        <div class="info-card">
-          <h3>🔐 Protection Tips</h3>
-          <p>Understand MFA, strong passwords, backups, updates, and safe browsing.</p>
-        </div>
-
-        <div class="info-card">
-          <h3>🧠 Practice Quizzes</h3>
-          <p>Test your knowledge with beginner-friendly cybersecurity questions soon.</p>
-        </div>
-      </section>
-    </section>
-
-    <!-- DICTIONARY PAGE -->
-    <section class="page" id="dictionaryPage">
-      <section class="page-header">
-        <span class="section-tag">Cybersecurity Dictionary</span>
-        <h2>Search Cybersecurity Terms</h2>
         <p>
-          Find beginner-friendly meanings, technical explanations, real-life examples,
-          and simple protection tips.
+          A beginner-friendly cybersecurity dictionary and learning app for students,
+          small business owners, and everyday internet users.
         </p>
 
-        <div class="dictionary-search">
+        <div class="search-box">
           <input
             type="text"
-            id="dictionarySearch"
-            placeholder="Search for a term..."
+            id="homeSearch"
+            placeholder="Search: phishing, malware, VPN, SOC..."
           />
+          <button id="homeSearchBtn">Search</button>
         </div>
 
-        <div class="category-buttons" id="categoryButtons">
-          <button class="category-btn active" data-category="All">All</button>
-          <button class="category-btn" data-category="Attacks">Attacks</button>
-          <button class="category-btn" data-category="Threats">Threats</button>
-          <button class="category-btn" data-category="Protection">Protection</button>
-          <button class="category-btn" data-category="Networking">Networking</button>
-          <button class="category-btn" data-category="Tools">Tools</button>
-          <button class="category-btn" data-category="Careers">Careers</button>
-          <button class="category-btn" data-category="Acronyms">Acronyms</button>
+        <div class="hero-buttons">
+          <button id="openDictionaryBtn">Open Dictionary</button>
+          <button id="startLearningBtn" class="light-btn">Start Learning</button>
         </div>
-      </section>
+      </div>
 
-      <section class="terms-grid" id="termsGrid"></section>
+      <div class="hero-card">
+        <span>Term of the Day</span>
+        <h3>Phishing</h3>
+        <p>
+          A trick used to make people reveal passwords, money, or private information
+          by pretending to be trusted.
+        </p>
+        <button id="termOfDayBtn">Learn More</button>
+      </div>
     </section>
 
-    <!-- LEARN PAGE -->
-    <section class="page" id="learnPage">
-      <section class="page-header">
-        <span class="section-tag">Learning Paths</span>
-        <h2>Start Learning Cybersecurity</h2>
-        <p>
-          Follow beginner-friendly learning paths to understand cybersecurity step by step.
-          Each path has short lessons and simple explanations.
-        </p>
-      </section>
+    <!-- STATS -->
+    <section class="stats-grid">
+      <div class="stat-card">
+        <h3>20+</h3>
+        <p>Cybersecurity Terms</p>
+      </div>
 
-      <section class="learning-grid" id="learningGrid"></section>
+      <div class="stat-card">
+        <h3>4</h3>
+        <p>Learning Paths</p>
+      </div>
 
-      <section class="lesson-detail hidden" id="lessonDetail">
-        <button class="back-learning-btn" id="backToLearningBtn">
-          ← Back to Learning Paths
-        </button>
-
-        <div class="lesson-top">
-          <span class="section-tag" id="lessonPathLabel">Learning Path</span>
-          <h2 id="lessonTitle">Lesson Title</h2>
-          <p id="lessonIntro">Lesson introduction will appear here.</p>
-        </div>
-
-        <div class="lesson-content-box">
-          <h3>Lesson Content</h3>
-          <p id="lessonContent"></p>
-
-          <h3>Key Points</h3>
-          <ul id="lessonKeyPoints"></ul>
-        </div>
-
-        <div class="lesson-actions">
-          <button id="prevLessonBtn">Previous Lesson</button>
-          <button id="markCompleteBtn">Mark as Complete</button>
-          <button id="nextLessonBtn">Next Lesson</button>
-        </div>
-      </section>
+      <div class="stat-card">
+        <h3>Coming</h3>
+        <p>Dynamic Quizzes</p>
+      </div>
     </section>
 
-    <!-- SAVED TERMS PAGE -->
-    <section class="page" id="savedPage">
-      <section class="page-header">
-        <span class="section-tag">Saved Terms</span>
-        <h2>Your Saved Cybersecurity Terms</h2>
+    <!-- QUICK FEATURES -->
+    <section class="features-grid">
+      <div class="feature-card">
+        <h3>⚠️ Common Threats</h3>
         <p>
-          Terms you save from the dictionary will appear here. This helps you review
-          important cybersecurity words later.
+          Learn about phishing, malware, ransomware, social engineering,
+          and other common cyber threats.
         </p>
-      </section>
+      </div>
 
-      <section class="terms-grid" id="savedTermsGrid"></section>
-    </section>
-
-    <!-- COMING SOON PAGE -->
-    <section class="page" id="comingSoonPage">
-      <section class="coming-soon">
-        <h2 id="comingSoonTitle">Coming Soon</h2>
+      <div class="feature-card">
+        <h3>🔐 Protection Tips</h3>
         <p>
-          This section will be built in the next steps. We are building the app page by page
-          so everything stays clear and organized.
+          Understand strong passwords, MFA, safe browsing, backups,
+          updates, and public Wi-Fi safety.
         </p>
-        <button id="backHomeBtn">Back Home</button>
-      </section>
+      </div>
+
+      <div class="feature-card">
+        <h3>🧠 Practice Quizzes</h3>
+        <p>
+          Test your cybersecurity knowledge with beginner-friendly questions
+          once the quiz page is added.
+        </p>
+      </div>
     </section>
 
   </main>
 
-  <!-- TERM DETAILS MODAL -->
-  <div class="modal-overlay" id="termModal">
-    <div class="modal-box">
-      <button class="close-modal" id="closeModal">×</button>
-
-      <span class="modal-category" id="modalCategory"></span>
-
-      <h2 id="modalTerm"></h2>
-
-      <div class="modal-section">
-        <h3>Simple Meaning</h3>
-        <p id="modalSimple"></p>
-      </div>
-
-      <div class="modal-section">
-        <h3>Technical Meaning</h3>
-        <p id="modalTechnical"></p>
-      </div>
-
-      <div class="modal-section red-soft">
-        <h3>Real-Life Example</h3>
-        <p id="modalExample"></p>
-      </div>
-
-      <div class="modal-section">
-        <h3>How to Stay Safe</h3>
-        <ul id="modalSafety"></ul>
-      </div>
-
-      <div class="modal-section">
-        <h3>Related Terms</h3>
-        <div class="related-list" id="modalRelated"></div>
-      </div>
-
-      <button class="save-modal-btn" id="modalSaveBtn">Save Term</button>
-    </div>
-  </div>
-
+  <!-- FOOTER -->
   <footer>
     <p>© 2026 BeMight Security. Cybersecurity made simple for beginners.</p>
   </footer>
