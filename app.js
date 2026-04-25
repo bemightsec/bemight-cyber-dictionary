@@ -7,6 +7,18 @@ const openDictionaryBtn = document.getElementById("openDictionaryBtn");
 const startLearningBtn = document.getElementById("startLearningBtn");
 const termOfDayBtn = document.getElementById("termOfDayBtn");
 
+const navLinks = navMenu.querySelectorAll("a");
+
+navLinks.forEach(link => {
+  const text = link.textContent.trim().toLowerCase();
+
+  if (text === "dictionary") link.href = "dictionary.html";
+  if (text === "learn") link.href = "#";
+  if (text === "quiz") link.href = "#";
+  if (text === "saved") link.href = "#";
+  if (text === "about") link.href = "#";
+});
+
 const cyberTerms = [
   "Phishing",
   "Malware",
@@ -60,23 +72,14 @@ function getSuggestions(value) {
       return (
         lowerTerm.includes(searchValue) ||
         lowerTerm.startsWith(searchValue) ||
-        isCloseMatch(searchValue, lowerTerm)
+        lowerTerm.includes(searchValue.slice(0, 3))
       );
     })
     .slice(0, 6);
 }
 
-function isCloseMatch(input, term) {
-  if (input.length < 3) return false;
-
-  const firstThree = input.slice(0, 3);
-
-  return term.includes(firstThree);
-}
-
 function showSuggestions() {
-  const value = homeSearch.value;
-  const suggestions = getSuggestions(value);
+  const suggestions = getSuggestions(homeSearch.value);
 
   suggestionsBox.innerHTML = "";
 
@@ -101,6 +104,16 @@ function showSuggestions() {
   suggestionsBox.style.display = "block";
 }
 
+function goToDictionary() {
+  const searchValue = homeSearch.value.trim();
+
+  if (searchValue === "") {
+    window.location.href = "dictionary.html";
+  } else {
+    window.location.href = `dictionary.html?search=${encodeURIComponent(searchValue)}`;
+  }
+}
+
 homeSearch.addEventListener("input", showSuggestions);
 
 homeSearch.addEventListener("focus", () => {
@@ -115,32 +128,16 @@ document.addEventListener("click", event => {
   }
 });
 
-homeSearchBtn.addEventListener("click", () => {
-  const searchValue = homeSearch.value.trim();
-
-  if (searchValue === "") {
-    alert("Please type a cybersecurity term first.");
-    return;
-  }
-
-  alert(`You searched for: ${searchValue}. Dictionary page will be connected next.`);
-});
+homeSearchBtn.addEventListener("click", goToDictionary);
 
 homeSearch.addEventListener("keypress", event => {
   if (event.key === "Enter") {
-    const searchValue = homeSearch.value.trim();
-
-    if (searchValue === "") {
-      alert("Please type a cybersecurity term first.");
-      return;
-    }
-
-    alert(`You searched for: ${searchValue}. Dictionary page will be connected next.`);
+    goToDictionary();
   }
 });
 
 openDictionaryBtn.addEventListener("click", () => {
-  alert("Dictionary page is the next page we will build.");
+  window.location.href = "dictionary.html";
 });
 
 startLearningBtn.addEventListener("click", () => {
@@ -148,5 +145,5 @@ startLearningBtn.addEventListener("click", () => {
 });
 
 termOfDayBtn.addEventListener("click", () => {
-  alert("Phishing means a trick used to steal passwords, money, or private information by pretending to be trusted.");
+  window.location.href = "dictionary.html?search=Phishing";
 });
