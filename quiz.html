@@ -6,9 +6,114 @@
 
   <title>Quiz | BeMight Cyber Dictionary</title>
 
-  <link rel="stylesheet" href="styles.css" />
+  <!-- PWA SETTINGS -->
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#dc2626" />
+  <meta name="application-name" content="BeMight Cyber Dictionary" />
+
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="BeMight Cyber" />
+
+  <link rel="icon" href="icon-192.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="icon-192.svg" />
 
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f8fafc;
+      color: #111827;
+      font-family: Arial, sans-serif;
+    }
+
+    .site-header {
+      background: white;
+      border-bottom: 1px solid #e5e7eb;
+      padding: 16px 6%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .brand {
+      text-decoration: none;
+      color: #111827;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-icon {
+      width: 48px;
+      height: 48px;
+      background: #dc2626;
+      color: white;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+
+    .brand h1 {
+      font-size: 20px;
+      font-weight: 900;
+      line-height: 1.2;
+    }
+
+    .brand p {
+      font-size: 13px;
+      color: #6b7280;
+      margin-top: 2px;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-menu a {
+      text-decoration: none;
+      color: #374151;
+      font-weight: 700;
+      padding: 10px 14px;
+      border-radius: 12px;
+    }
+
+    .nav-menu a:hover,
+    .nav-menu a.active {
+      background: #fee2e2;
+      color: #dc2626;
+    }
+
+    .menu-btn {
+      display: none;
+      border: none;
+      background: #dc2626;
+      color: white;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 22px;
+      cursor: pointer;
+    }
+
+    main {
+      padding: 32px 6%;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
     .page-header {
       background: white;
       border: 1px solid #e5e7eb;
@@ -228,6 +333,7 @@
     }
 
     .result-actions {
+      margin-top: 10px;
       display: flex;
       justify-content: center;
       gap: 12px;
@@ -236,6 +342,65 @@
 
     .random-btn {
       background: #111827;
+    }
+
+    .quiz-community {
+      margin-top: 28px;
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 24px;
+      padding: 24px;
+    }
+
+    .quiz-community span {
+      display: inline-block;
+      background: #fee2e2;
+      color: #dc2626;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .quiz-community h3 {
+      margin-top: 14px;
+      font-size: 26px;
+      color: #111827;
+    }
+
+    .quiz-community p {
+      margin: 10px auto 0;
+      color: #4b5563;
+      line-height: 1.7;
+      max-width: 680px;
+    }
+
+    .quiz-community-buttons {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .quiz-community-buttons a {
+      text-decoration: none;
+      background: #dc2626;
+      color: white;
+      padding: 14px 18px;
+      border-radius: 14px;
+      font-weight: 900;
+      display: inline-block;
+    }
+
+    .quiz-community-buttons a.dark {
+      background: #111827;
+    }
+
+    .quiz-community-buttons a.light {
+      background: #fee2e2;
+      color: #dc2626;
     }
 
     .history-list {
@@ -266,7 +431,47 @@
       line-height: 1.7;
     }
 
+    footer {
+      text-align: center;
+      padding: 30px 6%;
+      color: #6b7280;
+    }
+
     @media (max-width: 768px) {
+      .site-header {
+        padding: 16px 6%;
+      }
+
+      .brand h1 {
+        font-size: 18px;
+      }
+
+      .menu-btn {
+        display: block;
+      }
+
+      .nav-menu {
+        display: none;
+        position: absolute;
+        top: 82px;
+        right: 6%;
+        left: 6%;
+        background: white;
+        border-radius: 20px;
+        padding: 16px;
+        flex-direction: column;
+        align-items: stretch;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+      }
+
+      .nav-menu.show {
+        display: flex;
+      }
+
+      .nav-menu a {
+        padding: 14px;
+      }
+
       .page-header {
         padding: 24px;
       }
@@ -288,6 +493,12 @@
       .quiz-result,
       .quiz-history {
         padding: 22px;
+      }
+
+      .quiz-community-buttons a,
+      .result-actions button {
+        width: 100%;
+        text-align: center;
       }
     }
   </style>
@@ -388,6 +599,31 @@
         <button class="restart-btn" id="restartQuizBtn">Restart Same Setup</button>
         <button class="random-btn" id="randomQuizBtn">Try Another Random Quiz</button>
       </div>
+
+      <div class="quiz-community">
+        <span>Keep Learning</span>
+
+        <h3>Want more cyber tips and practice updates?</h3>
+
+        <p>
+          Join the BeMight Security community for simple cyber news, scam alerts,
+          beginner explanations, and support when you need help understanding a topic.
+        </p>
+
+        <div class="quiz-community-buttons">
+          <a href="https://whatsapp.com/channel/0029VaHqXRa84Om5CcZx2o13" target="_blank" rel="noopener noreferrer">
+            Join WhatsApp Channel
+          </a>
+
+          <a href="https://bemightsec.github.io/news.html" target="_blank" rel="noopener noreferrer" class="dark">
+            Read Cyber News
+          </a>
+
+          <a href="mailto:contact.bemightsec@gmail.com" class="light">
+            Ask a Question
+          </a>
+        </div>
+      </div>
     </section>
 
     <section class="quiz-history">
@@ -404,5 +640,6 @@
 
   <script src="quiz-data.js?v=1"></script>
   <script src="quiz.js?v=3"></script>
+  <script src="pwa.js?v=1"></script>
 </body>
 </html>
