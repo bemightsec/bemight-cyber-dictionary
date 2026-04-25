@@ -7,18 +7,6 @@ const openDictionaryBtn = document.getElementById("openDictionaryBtn");
 const startLearningBtn = document.getElementById("startLearningBtn");
 const termOfDayBtn = document.getElementById("termOfDayBtn");
 
-const navLinks = navMenu.querySelectorAll("a");
-
-navLinks.forEach(link => {
-  const text = link.textContent.trim().toLowerCase();
-
-  if (text === "dictionary") link.href = "dictionary.html";
-  if (text === "learn") link.href = "learn.html";
-  if (text === "quiz") link.href = "#";
- if (text === "saved") link.href = "saved.html";
-  if (text === "about") link.href = "#";
-});
-
 const cyberTerms = [
   "Phishing",
   "Malware",
