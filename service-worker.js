@@ -1,4 +1,4 @@
-const CACHE_NAME = "bemight-cyber-dictionary-v1";
+const CACHE_NAME = "bemight-cyber-dictionary-v2";
 
 const FILES_TO_CACHE = [
   "./",
@@ -51,22 +51,24 @@ self.addEventListener("activate", event => {
 self.addEventListener("fetch", event => {
   if (event.request.method !== "GET") return;
 
-  event.respondWith(
-    caches.match(event.request).then(cachedResponse => {
-      if (cachedResponse) {
-        return cachedResponse;
-      }
+  const requestUrl = new URL(event.request.url);
 
-      return fetch(event.request)
-        .then(networkResponse => {
-          return caches.open(CACHE_NAME).then(cache => {
-            cache.put(event.request, networkResponse.clone());
-            return networkResponse;
-          });
-        })
-        .catch(() => {
-          return caches.match("./index.html");
+  if (requestUrl.origin !== self.location.origin) {
+    return;
+  }
+
+  event.respondWith(
+    fetch(event.request)
+      .then(networkResponse => {
+        return caches.open(CACHE_NAME).then(cache => {
+          cache.put(event.request, networkResponse.clone());
+          return networkResponse;
         });
-    })
+      })
+      .catch(() => {
+        return caches.match(event.request).then(cachedResponse => {
+          return cachedResponse || caches.match("./index.html");
+        });
+      })
   );
 });
