@@ -1,3 +1,7 @@
+const dictionaryPage = document.getElementById("dictionaryPage");
+const savedPage = document.getElementById("savedPage");
+const comingSoonPage = document.getElementById("comingSoonPage");
+
 const menuBtn = document.getElementById("menuBtn");
 const navMenu = document.getElementById("navMenu");
 const navLinks = document.querySelectorAll(".nav-link");
@@ -17,9 +21,11 @@ const backHomeBtn = document.getElementById("backHomeBtn");
 const dictionarySearch = document.getElementById("dictionarySearch");
 const categoryButtons = document.querySelectorAll(".category-btn");
 const termsGrid = document.getElementById("termsGrid");
+const savedTermsGrid = document.getElementById("savedTermsGrid");
 
 const termModal = document.getElementById("termModal");
 const closeModal = document.getElementById("closeModal");
+const modalSaveBtn = document.getElementById("modalSaveBtn");
 
 const modalCategory = document.getElementById("modalCategory");
 const modalTerm = document.getElementById("modalTerm");
@@ -30,6 +36,9 @@ const modalSafety = document.getElementById("modalSafety");
 const modalRelated = document.getElementById("modalRelated");
 
 let currentCategory = "All";
+let selectedTerm = null;
+
+let savedTerms = JSON.parse(localStorage.getItem("bemightSavedTerms")) || [];
 
 const cyberTerms = [
   {
@@ -235,19 +244,60 @@ const cyberTerms = [
 ];
 
 function showPage(page) {
+  function saveToLocalStorage() {
+  localStorage.setItem("bemightSavedTerms", JSON.stringify(savedTerms));
+}
+
+function isSaved(termName) {
+  return savedTerms.includes(termName);
+}
+
+function toggleSaveTerm(termName) {
+  if (isSaved(termName)) {
+    savedTerms = savedTerms.filter(item => item !== termName);
+  } else {
+    savedTerms.push(termName);
+  }
+
+  saveToLocalStorage();
+  renderTerms();
+  renderSavedTerms();
+
+  if (selectedTerm && selectedTerm.term === termName) {
+    updateModalSaveButton();
+  }
+}
+
+function updateModalSaveButton() {
+  if (!selectedTerm) return;
+
+  if (isSaved(selectedTerm.term)) {
+    modalSaveBtn.textContent = "Saved ✓";
+    modalSaveBtn.classList.add("saved");
+  } else {
+    modalSaveBtn.textContent = "Save Term";
+    modalSaveBtn.classList.remove("saved");
+  }
+}
+  
+function showPage(page) {
   homePage.classList.remove("active");
-  dictionaryPage.classList.remove("active");
-  comingSoonPage.classList.remove("active");
+dictionaryPage.classList.remove("active");
+savedPage.classList.remove("active");
+comingSoonPage.classList.remove("active");
 
   if (page === "home") {
     homePage.classList.add("active");
   } else if (page === "dictionary") {
     dictionaryPage.classList.add("active");
     renderTerms();
-  } else {
-    comingSoonTitle.textContent = page.charAt(0).toUpperCase() + page.slice(1) + " Coming Soon";
-    comingSoonPage.classList.add("active");
-  }
+  } else if (page === "saved") {
+  savedPage.classList.add("active");
+  renderSavedTerms();
+} else {
+  comingSoonTitle.textContent = page.charAt(0).toUpperCase() + page.slice(1) + " Coming Soon";
+  comingSoonPage.classList.add("active");
+}
 
   navLinks.forEach(link => {
     link.classList.toggle("active", link.dataset.page === page);
@@ -288,20 +338,65 @@ function renderTerms() {
     const card = document.createElement("div");
     card.className = "term-card";
 
+    const saved = isSaved(item.term);
+
     card.innerHTML = `
       <span class="term-category">${item.category}</span>
       <h3>${item.term}</h3>
       <p>${item.simpleMeaning}</p>
-      <button>View Details</button>
+
+      <div class="term-actions">
+        <button class="view-btn">View Details</button>
+        <button class="save-btn ${saved ? "saved" : ""}">
+          ${saved ? "Saved ✓" : "Save"}
+        </button>
+      </div>
     `;
 
-    card.querySelector("button").addEventListener("click", () => openTermModal(item));
+    card.querySelector(".view-btn").addEventListener("click", () => openTermModal(item));
+    card.querySelector(".save-btn").addEventListener("click", () => toggleSaveTerm(item.term));
 
     termsGrid.appendChild(card);
   });
 }
+  function renderSavedTerms() {
+  savedTermsGrid.innerHTML = "";
 
+  const savedItems = cyberTerms.filter(item => savedTerms.includes(item.term));
+
+  if (savedItems.length === 0) {
+    savedTermsGrid.innerHTML = `
+      <div class="empty-state">
+        <h3>No saved terms yet</h3>
+        <p>Go to the Dictionary page and tap Save on any term you want to review later.</p>
+      </div>
+    `;
+    return;
+  }
+
+  savedItems.forEach(item => {
+    const card = document.createElement("div");
+    card.className = "term-card";
+
+    card.innerHTML = `
+      <span class="term-category">${item.category}</span>
+      <h3>${item.term}</h3>
+      <p>${item.simpleMeaning}</p>
+
+      <div class="term-actions">
+        <button class="view-btn">View Details</button>
+        <button class="save-btn saved">Remove</button>
+      </div>
+    `;
+
+    card.querySelector(".view-btn").addEventListener("click", () => openTermModal(item));
+    card.querySelector(".save-btn").addEventListener("click", () => toggleSaveTerm(item.term));
+
+    savedTermsGrid.appendChild(card);
+  });
+}
 function openTermModal(item) {
+  selectedTerm = item;
   modalCategory.textContent = `${item.category} • ${item.level}`;
   modalTerm.textContent = item.term;
   modalSimple.textContent = item.simpleMeaning;
@@ -321,7 +416,8 @@ function openTermModal(item) {
     span.textContent = term;
     modalRelated.appendChild(span);
   });
-
+  updateModalSaveButton();
+  
   termModal.classList.add("show");
 }
 
@@ -389,5 +485,9 @@ termModal.addEventListener("click", event => {
     termModal.classList.remove("show");
   }
 });
-
+modalSaveBtn.addEventListener("click", () => {
+  if (selectedTerm) {
+    toggleSaveTerm(selectedTerm.term);
+  }
+});
 renderTerms();
