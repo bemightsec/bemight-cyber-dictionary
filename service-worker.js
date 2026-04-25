@@ -1,4 +1,4 @@
-const CACHE_NAME = "bemight-cyber-dictionary-v2";
+const CACHE_NAME = "bemight-cyber-dictionary-v3";
 
 const FILES_TO_CACHE = [
   "./",
@@ -19,7 +19,8 @@ const FILES_TO_CACHE = [
   "./quiz-data.js",
   "./manifest.json",
   "./icon-192.svg",
-  "./icon-512.svg"
+  "./icon-512.svg",
+  "./pwa.js"
 ];
 
 self.addEventListener("install", event => {
