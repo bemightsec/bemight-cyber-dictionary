@@ -4,8 +4,8 @@ const navLinks = document.querySelectorAll(".nav-link");
 
 const homePage = document.getElementById("homePage");
 const dictionaryPage = document.getElementById("dictionaryPage");
-const savedPage = document.getElementById("savedPage");
 const learnPage = document.getElementById("learnPage");
+const savedPage = document.getElementById("savedPage");
 const comingSoonPage = document.getElementById("comingSoonPage");
 const comingSoonTitle = document.getElementById("comingSoonTitle");
 
@@ -20,6 +20,7 @@ const dictionarySearch = document.getElementById("dictionarySearch");
 const categoryButtons = document.querySelectorAll(".category-btn");
 const termsGrid = document.getElementById("termsGrid");
 const savedTermsGrid = document.getElementById("savedTermsGrid");
+
 const learningGrid = document.getElementById("learningGrid");
 const lessonDetail = document.getElementById("lessonDetail");
 const backToLearningBtn = document.getElementById("backToLearningBtn");
@@ -48,7 +49,9 @@ const modalRelated = document.getElementById("modalRelated");
 
 let currentCategory = "All";
 let selectedTerm = null;
+
 let savedTerms = JSON.parse(localStorage.getItem("bemightSavedTerms")) || [];
+
 let activePathId = null;
 let activeLessonIndex = 0;
 
@@ -348,108 +351,7 @@ const cyberTerms = [
   }
 ];
 
-function saveLearningProgress() {
-  localStorage.setItem(
-    "bemightLearningProgress",
-    JSON.stringify(learningProgress)
-  );
-}
-
-function getPathProgress(pathId) {
-  const path = learningPaths.find(item => item.id === pathId);
-  const completedLessons = learningProgress[pathId] || [];
-
-  if (!path) return 0;
-
-  return Math.round((completedLessons.length / path.lessons.length) * 100);
-}
-
-function isLessonCompleted(pathId, lessonIndex) {
-  const completedLessons = learningProgress[pathId] || [];
-  return completedLessons.includes(lessonIndex);
-}
-function saveToLocalStorage() {
-  localStorage.setItem("bemightSavedTerms", JSON.stringify(savedTerms));
-}
-
-function isSaved(termName) {
-  return savedTerms.includes(termName);
-}
-
-function toggleSaveTerm(termName) {
-  if (isSaved(termName)) {
-    savedTerms = savedTerms.filter(item => item !== termName);
-  } else {
-    savedTerms.push(termName);
-  }
-
-  saveToLocalStorage();
-  renderTerms();
-  renderSavedTerms();
-  updateModalSaveButton();
-}
-
-function updateModalSaveButton() {
-  if (!selectedTerm) return;
-
-  if (isSaved(selectedTerm.term)) {
-    modalSaveBtn.textContent = "Saved ✓";
-    modalSaveBtn.classList.add("saved");
-  } else {
-    modalSaveBtn.textContent = "Save Term";
-    modalSaveBtn.classList.remove("saved");
-  }
-}
-
-function showPage(page) {
-  homePage.classList.remove("active");
-dictionaryPage.classList.remove("active");
-learnPage.classList.remove("active");
-savedPage.classList.remove("active");
-comingSoonPage.classList.remove("active");
-
-  if (page === "home") {
-    homePage.classList.add("active");
-  } else if (page === "dictionary") {
-    dictionaryPage.classList.add("active");
-    renderTerms();
-  } else if (page === "learn") {
-  learnPage.classList.add("active");
-  lessonDetail.classList.add("hidden");
-  learningGrid.classList.remove("hidden");
-  renderLearningPaths();
-} else if (page === "saved") {
-  savedPage.classList.add("active");
-  renderSavedTerms();
-} else {
-    comingSoonTitle.textContent =
-      page.charAt(0).toUpperCase() + page.slice(1) + " Coming Soon";
-    comingSoonPage.classList.add("active");
-  }
-
-  navLinks.forEach(link => {
-    link.classList.toggle("active", link.dataset.page === page);
-  });
-
-  navMenu.classList.remove("show");
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}
-
-function renderTerms() {
-  const searchValue = dictionarySearch.value.toLowerCase();
-
-  const filteredTerms = cyberTerms.filter(item => {
-    const matchesSearch =
-      item.term.toLowerCase().includes(searchValue) ||
-      item.simpleMeaning.toLowerCase().includes(searchValue) ||
-      item.category.toLowerCase().includes(searchValue);
-
-    const matchesCategory =
-      currentCategory === "All" || item.category === currentCategory;
-
-    return matchesSearch && matchesCategory;
-  });
-  const learningPaths = [
+const learningPaths = [
   {
     id: "basics",
     title: "Cybersecurity Basics",
@@ -644,6 +546,97 @@ function renderTerms() {
   }
 ];
 
+function saveTermsToLocalStorage() {
+  localStorage.setItem("bemightSavedTerms", JSON.stringify(savedTerms));
+}
+
+function saveLearningProgress() {
+  localStorage.setItem(
+    "bemightLearningProgress",
+    JSON.stringify(learningProgress)
+  );
+}
+
+function isSaved(termName) {
+  return savedTerms.includes(termName);
+}
+
+function toggleSaveTerm(termName) {
+  if (isSaved(termName)) {
+    savedTerms = savedTerms.filter(item => item !== termName);
+  } else {
+    savedTerms.push(termName);
+  }
+
+  saveTermsToLocalStorage();
+  renderTerms();
+  renderSavedTerms();
+  updateModalSaveButton();
+}
+
+function getPathProgress(pathId) {
+  const path = learningPaths.find(item => item.id === pathId);
+  const completedLessons = learningProgress[pathId] || [];
+
+  if (!path) return 0;
+
+  return Math.round((completedLessons.length / path.lessons.length) * 100);
+}
+
+function isLessonCompleted(pathId, lessonIndex) {
+  const completedLessons = learningProgress[pathId] || [];
+  return completedLessons.includes(lessonIndex);
+}
+
+function showPage(page) {
+  homePage.classList.remove("active");
+  dictionaryPage.classList.remove("active");
+  learnPage.classList.remove("active");
+  savedPage.classList.remove("active");
+  comingSoonPage.classList.remove("active");
+
+  if (page === "home") {
+    homePage.classList.add("active");
+  } else if (page === "dictionary") {
+    dictionaryPage.classList.add("active");
+    renderTerms();
+  } else if (page === "learn") {
+    learnPage.classList.add("active");
+    lessonDetail.classList.add("hidden");
+    learningGrid.classList.remove("hidden");
+    renderLearningPaths();
+  } else if (page === "saved") {
+    savedPage.classList.add("active");
+    renderSavedTerms();
+  } else {
+    comingSoonTitle.textContent =
+      page.charAt(0).toUpperCase() + page.slice(1) + " Coming Soon";
+    comingSoonPage.classList.add("active");
+  }
+
+  navLinks.forEach(link => {
+    link.classList.toggle("active", link.dataset.page === page);
+  });
+
+  navMenu.classList.remove("show");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function renderTerms() {
+  const searchValue = dictionarySearch.value.toLowerCase();
+
+  const filteredTerms = cyberTerms.filter(item => {
+    const matchesSearch =
+      item.term.toLowerCase().includes(searchValue) ||
+      item.simpleMeaning.toLowerCase().includes(searchValue) ||
+      item.category.toLowerCase().includes(searchValue);
+
+    const matchesCategory =
+      currentCategory === "All" || item.category === currentCategory;
+
+    return matchesSearch && matchesCategory;
+  });
+
   termsGrid.innerHTML = "";
 
   if (filteredTerms.length === 0) {
@@ -729,106 +722,6 @@ function renderSavedTerms() {
   });
 }
 
-function openTermModal(item) {
-  selectedTerm = item;
-
-  modalCategory.textContent = `${item.category} • ${item.level}`;
-  modalTerm.textContent = item.term;
-  modalSimple.textContent = item.simpleMeaning;
-  modalTechnical.textContent = item.technicalMeaning;
-  modalExample.textContent = item.example;
-
-  modalSafety.innerHTML = "";
-  item.safety.forEach(point => {
-    const li = document.createElement("li");
-    li.textContent = point;
-    modalSafety.appendChild(li);
-  });
-
-  modalRelated.innerHTML = "";
-  item.related.forEach(term => {
-    const span = document.createElement("span");
-    span.textContent = term;
-    modalRelated.appendChild(span);
-  });
-
-  updateModalSaveButton();
-  termModal.classList.add("show");
-}
-
-menuBtn.addEventListener("click", () => {
-  navMenu.classList.toggle("show");
-});
-
-navLinks.forEach(link => {
-  link.addEventListener("click", event => {
-    event.preventDefault();
-    showPage(link.dataset.page);
-  });
-});
-
-openDictionaryBtn.addEventListener("click", () => {
-  showPage("dictionary");
-});
-
-homeSearchBtn.addEventListener("click", () => {
-  const value = homeSearchInput.value.trim();
-  showPage("dictionary");
-  dictionarySearch.value = value;
-  renderTerms();
-});
-
-homeSearchInput.addEventListener("keypress", event => {
-  if (event.key === "Enter") {
-    const value = homeSearchInput.value.trim();
-    showPage("dictionary");
-    dictionarySearch.value = value;
-    renderTerms();
-  }
-});
-
-startLearningBtn.addEventListener("click", () => {
-  showPage("learn");
-});
-
-termOfDayBtn.addEventListener("click", () => {
-  const phishing = cyberTerms.find(item => item.term === "Phishing");
-  openTermModal(phishing);
-});
-
-backHomeBtn.addEventListener("click", () => {
-  showPage("home");
-});
-
-dictionarySearch.addEventListener("input", renderTerms);
-
-categoryButtons.forEach(button => {
-  button.addEventListener("click", () => {
-    categoryButtons.forEach(btn => btn.classList.remove("active"));
-    button.classList.add("active");
-    currentCategory = button.dataset.category;
-    renderTerms();
-  });
-});
-
-closeModal.addEventListener("click", () => {
-  termModal.classList.remove("show");
-});
-
-termModal.addEventListener("click", event => {
-  if (event.target === termModal) {
-    termModal.classList.remove("show");
-  }
-});
-
-modalSaveBtn.addEventListener("click", () => {
-  if (selectedTerm) {
-    toggleSaveTerm(selectedTerm.term);
-  }
-});
-
-renderTerms();
-renderSavedTerms();
 function renderLearningPaths() {
   learningGrid.innerHTML = "";
 
@@ -884,6 +777,7 @@ function renderLesson() {
   lessonContent.textContent = lesson.content;
 
   lessonKeyPoints.innerHTML = "";
+
   lesson.keyPoints.forEach(point => {
     const li = document.createElement("li");
     li.textContent = point;
@@ -914,3 +808,149 @@ function markCurrentLessonComplete() {
   saveLearningProgress();
   renderLesson();
 }
+
+function openTermModal(item) {
+  selectedTerm = item;
+
+  modalCategory.textContent = `${item.category} • ${item.level}`;
+  modalTerm.textContent = item.term;
+  modalSimple.textContent = item.simpleMeaning;
+  modalTechnical.textContent = item.technicalMeaning;
+  modalExample.textContent = item.example;
+
+  modalSafety.innerHTML = "";
+
+  item.safety.forEach(point => {
+    const li = document.createElement("li");
+    li.textContent = point;
+    modalSafety.appendChild(li);
+  });
+
+  modalRelated.innerHTML = "";
+
+  item.related.forEach(term => {
+    const span = document.createElement("span");
+    span.textContent = term;
+    modalRelated.appendChild(span);
+  });
+
+  updateModalSaveButton();
+  termModal.classList.add("show");
+}
+
+function updateModalSaveButton() {
+  if (!selectedTerm) return;
+
+  if (isSaved(selectedTerm.term)) {
+    modalSaveBtn.textContent = "Saved ✓";
+    modalSaveBtn.classList.add("saved");
+  } else {
+    modalSaveBtn.textContent = "Save Term";
+    modalSaveBtn.classList.remove("saved");
+  }
+}
+
+menuBtn.addEventListener("click", () => {
+  navMenu.classList.toggle("show");
+});
+
+navLinks.forEach(link => {
+  link.addEventListener("click", event => {
+    event.preventDefault();
+    showPage(link.dataset.page);
+  });
+});
+
+openDictionaryBtn.addEventListener("click", () => {
+  showPage("dictionary");
+});
+
+startLearningBtn.addEventListener("click", () => {
+  showPage("learn");
+});
+
+homeSearchBtn.addEventListener("click", () => {
+  const value = homeSearchInput.value.trim();
+
+  showPage("dictionary");
+  dictionarySearch.value = value;
+  renderTerms();
+});
+
+homeSearchInput.addEventListener("keypress", event => {
+  if (event.key === "Enter") {
+    const value = homeSearchInput.value.trim();
+
+    showPage("dictionary");
+    dictionarySearch.value = value;
+    renderTerms();
+  }
+});
+
+termOfDayBtn.addEventListener("click", () => {
+  const phishing = cyberTerms.find(item => item.term === "Phishing");
+  openTermModal(phishing);
+});
+
+backHomeBtn.addEventListener("click", () => {
+  showPage("home");
+});
+
+dictionarySearch.addEventListener("input", renderTerms);
+
+categoryButtons.forEach(button => {
+  button.addEventListener("click", () => {
+    categoryButtons.forEach(btn => btn.classList.remove("active"));
+
+    button.classList.add("active");
+    currentCategory = button.dataset.category;
+
+    renderTerms();
+  });
+});
+
+backToLearningBtn.addEventListener("click", () => {
+  lessonDetail.classList.add("hidden");
+  learningGrid.classList.remove("hidden");
+  renderLearningPaths();
+});
+
+prevLessonBtn.addEventListener("click", () => {
+  if (activeLessonIndex > 0) {
+    activeLessonIndex--;
+    renderLesson();
+  }
+});
+
+nextLessonBtn.addEventListener("click", () => {
+  const path = learningPaths.find(item => item.id === activePathId);
+
+  if (path && activeLessonIndex < path.lessons.length - 1) {
+    activeLessonIndex++;
+    renderLesson();
+  }
+});
+
+markCompleteBtn.addEventListener("click", () => {
+  markCurrentLessonComplete();
+});
+
+closeModal.addEventListener("click", () => {
+  termModal.classList.remove("show");
+});
+
+termModal.addEventListener("click", event => {
+  if (event.target === termModal) {
+    termModal.classList.remove("show");
+  }
+});
+
+modalSaveBtn.addEventListener("click", () => {
+  if (selectedTerm) {
+    toggleSaveTerm(selectedTerm.term);
+  }
+});
+
+renderTerms();
+renderSavedTerms();
+renderLearningPaths();
