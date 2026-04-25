@@ -6,6 +6,18 @@
 
   <title>BeMight Cyber Dictionary</title>
 
+  <!-- PWA SETTINGS -->
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#dc2626" />
+  <meta name="application-name" content="BeMight Cyber Dictionary" />
+
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="BeMight Cyber" />
+
+  <link rel="icon" href="icon-192.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="icon-192.svg" />
+
   <style>
     * {
       margin: 0;
@@ -287,6 +299,92 @@
       line-height: 1.7;
     }
 
+    .community-section {
+      margin-top: 28px;
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 32px;
+      padding: 34px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .community-label {
+      display: inline-block;
+      background: #fee2e2;
+      color: #dc2626;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .community-section h2 {
+      margin-top: 16px;
+      font-size: 38px;
+      line-height: 1.2;
+      color: #111827;
+    }
+
+    .community-section p {
+      margin-top: 14px;
+      color: #4b5563;
+      line-height: 1.8;
+      max-width: 750px;
+    }
+
+    .community-buttons {
+      margin-top: 22px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .community-buttons a {
+      text-decoration: none;
+      background: #dc2626;
+      color: white;
+      padding: 14px 18px;
+      border-radius: 14px;
+      font-weight: 900;
+      display: inline-block;
+    }
+
+    .community-buttons a.dark {
+      background: #111827;
+    }
+
+    .community-buttons a.light {
+      background: #fee2e2;
+      color: #dc2626;
+    }
+
+    .community-card {
+      background: linear-gradient(135deg, #111827, #7f1d1d);
+      color: white;
+      border-radius: 26px;
+      padding: 26px;
+    }
+
+    .community-card h3 {
+      font-size: 26px;
+    }
+
+    .community-card ul {
+      margin-top: 16px;
+      padding-left: 20px;
+    }
+
+    .community-card li {
+      margin-top: 10px;
+      color: #fee2e2;
+      line-height: 1.6;
+      font-weight: 700;
+    }
+
     footer {
       text-align: center;
       padding: 30px 6%;
@@ -294,7 +392,8 @@
     }
 
     @media (max-width: 900px) {
-      .hero {
+      .hero,
+      .community-section {
         grid-template-columns: 1fr;
       }
 
@@ -347,6 +446,14 @@
         font-size: 36px;
       }
 
+      .community-section {
+        padding: 26px;
+      }
+
+      .community-section h2 {
+        font-size: 30px;
+      }
+
       .search-box {
         flex-direction: column;
       }
@@ -359,17 +466,13 @@
       .features-grid {
         grid-template-columns: 1fr;
       }
+
+      .community-buttons a {
+        width: 100%;
+        text-align: center;
+      }
     }
-  </style><link rel="manifest" href="manifest.json" />
-<meta name="theme-color" content="#dc2626" />
-<meta name="application-name" content="BeMight Cyber Dictionary" />
-
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-status-bar-style" content="default" />
-<meta name="apple-mobile-web-app-title" content="BeMight Cyber" />
-
-<link rel="icon" href="icon-192.svg" type="image/svg+xml" />
-<link rel="apple-touch-icon" href="icon-192.svg" />
+  </style>
 </head>
 <body>
 
@@ -435,7 +538,7 @@
 
     <section class="stats-grid">
       <div class="stat-card">
-        <h3>20+</h3>
+        <h3>40+</h3>
         <p>Cybersecurity Terms</p>
       </div>
 
@@ -445,8 +548,8 @@
       </div>
 
       <div class="stat-card">
-        <h3>Quiz</h3>
-        <p>Dynamic Quizzes</p>
+        <h3>40+</h3>
+        <p>Quiz Questions</p>
       </div>
     </section>
 
@@ -475,16 +578,45 @@
         </p>
       </div>
     </section>
+
+    <section class="community-section">
+      <div>
+        <span class="community-label">Join the Community</span>
+
+        <h2>Get cyber news, safety tips, and beginner support from BeMight Security.</h2>
+
+        <p>
+          Join the BeMight Security community for simple cybersecurity updates,
+          scam alerts, beginner learning support, and practical online safety tips.
+          You can also ask questions when you need help understanding a topic.
+        </p>
+
+        <div class="community-buttons">
+          <a href="#" target="_blank">Join WhatsApp Channel</a>
+          <a href="#" target="_blank" class="dark">Follow Our Page</a>
+          <a href="#" target="_blank" class="light">Read Cyber News</a>
+          <a href="#" target="_blank" class="dark">Ask a Question</a>
+        </div>
+      </div>
+
+      <div class="community-card">
+        <h3>What you’ll get</h3>
+
+        <ul>
+          <li>Simple cybersecurity news and scam alerts</li>
+          <li>Beginner-friendly explanations and learning tips</li>
+          <li>Updates on new dictionary terms and quiz questions</li>
+          <li>Support for students and everyday internet users</li>
+        </ul>
+      </div>
+    </section>
   </main>
 
   <footer>
     <p>© 2026 BeMight Security. Cybersecurity made simple for beginners.</p>
   </footer>
 
- <script src="app.js?v=20260425"></script>
-<script src="pwa.js?v=1"></script>
-</body>
-</html>
-  
+  <script src="app.js?v=20260425"></script>
+  <script src="pwa.js?v=1"></script>
 </body>
 </html>
