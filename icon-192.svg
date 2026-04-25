@@ -1,0 +1,7 @@
+<svg width="192" height="192" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="192" height="192" rx="42" fill="#DC2626"></rect>
+  <path d="M96 28L146 48V87C146 119 125 148 96 162C67 148 46 119 46 87V48L96 28Z" fill="white"></path>
+  <path d="M96 48L128 61V87C128 110 115 130 96 142C77 130 64 110 64 87V61L96 48Z" fill="#111827"></path>
+  <path d="M82 94L92 104L112 80" stroke="white" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"></path>
+  <text x="96" y="180" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="900" fill="white">BeMight</text>
+</svg>
