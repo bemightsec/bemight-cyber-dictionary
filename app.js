@@ -15,7 +15,7 @@ navLinks.forEach(link => {
   if (text === "dictionary") link.href = "dictionary.html";
   if (text === "learn") link.href = "#";
   if (text === "quiz") link.href = "#";
-  if (text === "saved") link.href = "#";
+ if (text === "saved") link.href = "saved.html";
   if (text === "about") link.href = "#";
 });
 
