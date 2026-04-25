@@ -6,9 +6,110 @@
 
   <title>About | BeMight Cyber Dictionary</title>
 
-  <link rel="stylesheet" href="styles.css" />
+  <!-- PWA SETTINGS -->
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#dc2626" />
+  <meta name="application-name" content="BeMight Cyber Dictionary" />
+
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="BeMight Cyber" />
+
+  <link rel="icon" href="icon-192.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="icon-192.svg" />
 
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f8fafc;
+      color: #111827;
+      font-family: Arial, sans-serif;
+    }
+
+    .site-header {
+      background: white;
+      border-bottom: 1px solid #e5e7eb;
+      padding: 16px 6%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .brand {
+      text-decoration: none;
+      color: #111827;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-icon {
+      width: 48px;
+      height: 48px;
+      background: #dc2626;
+      color: white;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+
+    .brand h1 {
+      font-size: 20px;
+      font-weight: 900;
+      line-height: 1.2;
+    }
+
+    .brand p {
+      font-size: 13px;
+      color: #6b7280;
+      margin-top: 2px;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-menu a {
+      text-decoration: none;
+      color: #374151;
+      font-weight: 700;
+      padding: 10px 14px;
+      border-radius: 12px;
+    }
+
+    .nav-menu a:hover,
+    .nav-menu a.active {
+      background: #fee2e2;
+      color: #dc2626;
+    }
+
+    .menu-btn {
+      display: none;
+      border: none;
+      background: #dc2626;
+      color: white;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 22px;
+      cursor: pointer;
+    }
+
+    main {
+      padding: 32px 6%;
+    }
+
     .about-hero {
       background: linear-gradient(135deg, #dc2626, #7f1d1d, #111827);
       color: white;
@@ -130,6 +231,74 @@
       font-weight: 700;
     }
 
+    .connect-section {
+      margin-top: 28px;
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 32px;
+      padding: 34px;
+      text-align: center;
+    }
+
+    .connect-label {
+      display: inline-block;
+      background: #fee2e2;
+      color: #dc2626;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .connect-section h3 {
+      margin: 16px auto 0;
+      font-size: 34px;
+      color: #111827;
+      max-width: 850px;
+      line-height: 1.25;
+    }
+
+    .connect-section p {
+      margin: 14px auto 0;
+      max-width: 760px;
+      color: #4b5563;
+      line-height: 1.8;
+    }
+
+    .connect-buttons {
+      margin-top: 24px;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .connect-buttons a {
+      text-decoration: none;
+      background: #dc2626;
+      color: white;
+      padding: 14px 18px;
+      border-radius: 14px;
+      font-weight: 900;
+      display: inline-block;
+    }
+
+    .connect-buttons a.dark {
+      background: #111827;
+    }
+
+    .connect-buttons a.light {
+      background: #fee2e2;
+      color: #dc2626;
+    }
+
+    .connect-buttons a.outline {
+      background: white;
+      color: #111827;
+      border: 1px solid #e5e7eb;
+    }
+
     .cta-box {
       margin-top: 28px;
       background: white;
@@ -172,7 +341,53 @@
       background: #111827;
     }
 
+    footer {
+      text-align: center;
+      padding: 30px 6%;
+      color: #6b7280;
+    }
+
+    footer a {
+      color: #dc2626;
+      font-weight: 900;
+      text-decoration: none;
+    }
+
     @media (max-width: 768px) {
+      .site-header {
+        padding: 16px 6%;
+      }
+
+      .brand h1 {
+        font-size: 18px;
+      }
+
+      .menu-btn {
+        display: block;
+      }
+
+      .nav-menu {
+        display: none;
+        position: absolute;
+        top: 82px;
+        right: 6%;
+        left: 6%;
+        background: white;
+        border-radius: 20px;
+        padding: 16px;
+        flex-direction: column;
+        align-items: stretch;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+      }
+
+      .nav-menu.show {
+        display: flex;
+      }
+
+      .nav-menu a {
+        padding: 14px;
+      }
+
       .about-hero {
         padding: 28px;
       }
@@ -194,21 +409,22 @@
       }
 
       .about-card h3,
-      .cta-box h3 {
+      .cta-box h3,
+      .connect-section h3 {
         font-size: 25px;
+      }
+
+      .connect-section {
+        padding: 24px;
+      }
+
+      .connect-buttons a,
+      .cta-actions a {
+        width: 100%;
+        text-align: center;
       }
     }
   </style>
-  <link rel="manifest" href="manifest.json" />
-<meta name="theme-color" content="#dc2626" />
-<meta name="application-name" content="BeMight Cyber Dictionary" />
-
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-status-bar-style" content="default" />
-<meta name="apple-mobile-web-app-title" content="BeMight Cyber" />
-
-<link rel="icon" href="icon-192.svg" type="image/svg+xml" />
-<link rel="apple-touch-icon" href="icon-192.svg" />
 </head>
 <body>
 
@@ -302,6 +518,7 @@
         <div class="creator-box">
           <p><strong>Created by:</strong> Prince Awuku Anobaah</p>
           <p><strong>Brand:</strong> BeMight Security</p>
+          <p><strong>Email:</strong> contact.bemightsec@gmail.com</p>
           <p><strong>Focus:</strong> Cybersecurity education, awareness, and beginner learning</p>
         </div>
       </div>
@@ -331,6 +548,39 @@
 
     </section>
 
+    <section class="connect-section">
+      <span class="connect-label">Connect With BeMight Security</span>
+
+      <h3>Follow, learn, ask questions, and stay updated.</h3>
+
+      <p>
+        Join the community, follow BeMight Security online, watch beginner-friendly videos,
+        read cybersecurity news, or contact us directly for questions and support.
+      </p>
+
+      <div class="connect-buttons">
+        <a href="https://whatsapp.com/channel/0029VaHqXRa84Om5CcZx2o13" target="_blank" rel="noopener noreferrer">
+          WhatsApp Channel
+        </a>
+
+        <a href="https://www.youtube.com/@BeMightSecurity" target="_blank" rel="noopener noreferrer" class="dark">
+          YouTube Channel
+        </a>
+
+        <a href="https://www.linkedin.com/in/bemight" target="_blank" rel="noopener noreferrer" class="outline">
+          LinkedIn
+        </a>
+
+        <a href="https://bemightsec.github.io/news.html" target="_blank" rel="noopener noreferrer" class="dark">
+          Cyber News
+        </a>
+
+        <a href="mailto:contact.bemightsec@gmail.com" class="light">
+          Email Us
+        </a>
+      </div>
+    </section>
+
     <section class="cta-box">
       <h3>Continue Learning</h3>
 
@@ -349,10 +599,14 @@
   </main>
 
   <footer>
-    <p>© 2026 BeMight Security. Cybersecurity made simple for beginners.</p>
+    <p>
+      © 2026 BeMight Security. Cybersecurity made simple for beginners.
+      Follow us on
+      <a href="https://www.youtube.com/@BeMightSecurity" target="_blank" rel="noopener noreferrer">YouTube</a>.
+    </p>
   </footer>
 
-  <script src="about.js"></script>
-<script src="pwa.js?v=1"></script>
+  <script src="about.js?v=1"></script>
+  <script src="pwa.js?v=1"></script>
 </body>
 </html>
