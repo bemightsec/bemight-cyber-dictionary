@@ -1,13 +1,10 @@
-const dictionaryPage = document.getElementById("dictionaryPage");
-const savedPage = document.getElementById("savedPage");
-const comingSoonPage = document.getElementById("comingSoonPage");
-
 const menuBtn = document.getElementById("menuBtn");
 const navMenu = document.getElementById("navMenu");
 const navLinks = document.querySelectorAll(".nav-link");
 
 const homePage = document.getElementById("homePage");
 const dictionaryPage = document.getElementById("dictionaryPage");
+const savedPage = document.getElementById("savedPage");
 const comingSoonPage = document.getElementById("comingSoonPage");
 const comingSoonTitle = document.getElementById("comingSoonTitle");
 
@@ -37,7 +34,6 @@ const modalRelated = document.getElementById("modalRelated");
 
 let currentCategory = "All";
 let selectedTerm = null;
-
 let savedTerms = JSON.parse(localStorage.getItem("bemightSavedTerms")) || [];
 
 const cyberTerms = [
@@ -120,131 +116,10 @@ const cyberTerms = [
     example: "Someone pretends to be IT support and asks for your password.",
     safety: ["Verify identities.", "Never share passwords.", "Be careful with urgent requests.", "Report suspicious behavior."],
     related: ["Phishing", "Impersonation", "Pretexting"]
-  },
-  {
-    term: "Zero-Day",
-    category: "Threats",
-    level: "Intermediate",
-    simpleMeaning: "A security weakness that is not yet fixed by the maker of the software.",
-    technicalMeaning: "A vulnerability unknown to the vendor or without an available patch.",
-    example: "Attackers abuse a new browser weakness before the company releases an update.",
-    safety: ["Keep systems updated.", "Use layered security.", "Limit unnecessary software.", "Monitor trusted security alerts."],
-    related: ["Vulnerability", "Exploit", "Patch"]
-  },
-  {
-    term: "Vulnerability",
-    category: "Threats",
-    level: "Beginner",
-    simpleMeaning: "A weakness that could be used to harm a system.",
-    technicalMeaning: "A flaw or weakness in software, hardware, process, or configuration that can be exploited.",
-    example: "An outdated app has a security weakness that attackers can abuse.",
-    safety: ["Install updates.", "Use secure settings.", "Remove unused apps.", "Follow security advisories."],
-    related: ["Patch", "Exploit", "Risk"]
-  },
-  {
-    term: "Exploit",
-    category: "Threats",
-    level: "Beginner",
-    simpleMeaning: "A method attackers use to take advantage of a weakness.",
-    technicalMeaning: "Code or technique used to abuse a vulnerability and cause unintended behavior.",
-    example: "An attacker uses a weakness in old software to gain unauthorized access.",
-    safety: ["Patch vulnerable software.", "Use security tools.", "Limit permissions.", "Monitor suspicious activity."],
-    related: ["Vulnerability", "Zero-Day", "Patch"]
-  },
-  {
-    term: "Patch",
-    category: "Protection",
-    level: "Beginner",
-    simpleMeaning: "An update that fixes a problem or security weakness.",
-    technicalMeaning: "A software update released to correct bugs, improve features, or fix security vulnerabilities.",
-    example: "Your phone update fixes a security issue that attackers could abuse.",
-    safety: ["Update devices regularly.", "Enable automatic updates.", "Restart devices when updates require it."],
-    related: ["Update", "Vulnerability", "Software Security"]
-  },
-  {
-    term: "IP Address",
-    category: "Networking",
-    level: "Beginner",
-    simpleMeaning: "A number that helps identify a device on a network.",
-    technicalMeaning: "An Internet Protocol address is a unique address used for network communication.",
-    example: "Your phone gets an IP address when it connects to Wi-Fi.",
-    safety: ["Use trusted networks.", "Avoid exposing devices directly online.", "Secure your router."],
-    related: ["Networking", "Router", "DNS"]
-  },
-  {
-    term: "DNS",
-    category: "Networking",
-    level: "Beginner",
-    simpleMeaning: "The system that changes website names into IP addresses.",
-    technicalMeaning: "Domain Name System translates human-readable domain names into IP addresses used by devices.",
-    example: "When you type a website name, DNS helps your browser find the correct server.",
-    safety: ["Use trusted DNS services.", "Watch out for fake domains.", "Check website spelling carefully."],
-    related: ["Domain", "IP Address", "DNS Spoofing"]
-  },
-  {
-    term: "HTTPS",
-    category: "Networking",
-    level: "Beginner",
-    simpleMeaning: "A safer version of HTTP that encrypts communication with websites.",
-    technicalMeaning: "HTTPS uses TLS encryption to protect data exchanged between a browser and a website.",
-    example: "A banking website uses HTTPS to help protect login details.",
-    safety: ["Check for HTTPS on sensitive sites.", "Avoid entering passwords on suspicious pages.", "Still verify the website address."],
-    related: ["Encryption", "TLS", "Web Security"]
-  },
-  {
-    term: "SOC",
-    category: "Careers",
-    level: "Beginner",
-    simpleMeaning: "A team that watches for cyber threats and responds to security alerts.",
-    technicalMeaning: "A Security Operations Center monitors, detects, analyzes, and responds to cybersecurity incidents.",
-    example: "A SOC analyst checks alerts from security tools and investigates suspicious activity.",
-    safety: ["Learn logs and alerts.", "Understand basic networking.", "Practice incident investigation.", "Document findings clearly."],
-    related: ["SIEM", "Incident Response", "Threat Detection"]
-  },
-  {
-    term: "SIEM",
-    category: "Tools",
-    level: "Intermediate",
-    simpleMeaning: "A tool that collects security logs and helps detect suspicious activity.",
-    technicalMeaning: "Security Information and Event Management software collects, analyzes, and correlates logs from systems and networks.",
-    example: "A SIEM shows repeated failed login attempts from an unusual location.",
-    safety: ["Review alerts regularly.", "Tune noisy alerts.", "Connect important log sources.", "Investigate unusual patterns."],
-    related: ["Logs", "SOC", "Detection"]
-  },
-  {
-    term: "Password Manager",
-    category: "Protection",
-    level: "Beginner",
-    simpleMeaning: "An app that stores and helps create strong passwords.",
-    technicalMeaning: "A password manager securely stores credentials and can generate strong unique passwords.",
-    example: "Instead of reusing one password, you use a password manager to create different passwords for every account.",
-    safety: ["Use a strong master password.", "Turn on MFA.", "Use unique passwords for each account."],
-    related: ["Password", "MFA", "Authentication"]
-  },
-  {
-    term: "Data Breach",
-    category: "Threats",
-    level: "Beginner",
-    simpleMeaning: "When private information is exposed or stolen.",
-    technicalMeaning: "A security incident where unauthorized people access confidential, sensitive, or protected data.",
-    example: "A company database is exposed and customer emails are leaked.",
-    safety: ["Change affected passwords.", "Enable MFA.", "Watch for suspicious messages.", "Monitor accounts."],
-    related: ["Privacy", "Incident", "Leak"]
-  },
-  {
-    term: "Antivirus",
-    category: "Tools",
-    level: "Beginner",
-    simpleMeaning: "Security software that helps detect and block harmful programs.",
-    technicalMeaning: "Software designed to identify, prevent, and remove malware and other malicious activity.",
-    example: "Antivirus warns you when a downloaded file looks dangerous.",
-    safety: ["Keep antivirus updated.", "Do not rely on antivirus alone.", "Avoid suspicious downloads."],
-    related: ["Malware", "Endpoint Security", "Threat Detection"]
   }
 ];
 
-function showPage(page) {
-  function saveToLocalStorage() {
+function saveToLocalStorage() {
   localStorage.setItem("bemightSavedTerms", JSON.stringify(savedTerms));
 }
 
@@ -262,14 +137,11 @@ function toggleSaveTerm(termName) {
   saveToLocalStorage();
   renderTerms();
   renderSavedTerms();
-
-  if (selectedTerm && selectedTerm.term === termName) {
-    updateModalSaveButton();
-  }
+  updateModalSaveButton();
 }
 
 function updateModalSaveButton() {
-  if (!selectedTerm) return;
+  if (!selectedTerm || !modalSaveBtn) return;
 
   if (isSaved(selectedTerm.term)) {
     modalSaveBtn.textContent = "Saved ✓";
@@ -279,12 +151,12 @@ function updateModalSaveButton() {
     modalSaveBtn.classList.remove("saved");
   }
 }
-  
+
 function showPage(page) {
   homePage.classList.remove("active");
-dictionaryPage.classList.remove("active");
-savedPage.classList.remove("active");
-comingSoonPage.classList.remove("active");
+  dictionaryPage.classList.remove("active");
+  savedPage.classList.remove("active");
+  comingSoonPage.classList.remove("active");
 
   if (page === "home") {
     homePage.classList.add("active");
@@ -292,12 +164,12 @@ comingSoonPage.classList.remove("active");
     dictionaryPage.classList.add("active");
     renderTerms();
   } else if (page === "saved") {
-  savedPage.classList.add("active");
-  renderSavedTerms();
-} else {
-  comingSoonTitle.textContent = page.charAt(0).toUpperCase() + page.slice(1) + " Coming Soon";
-  comingSoonPage.classList.add("active");
-}
+    savedPage.classList.add("active");
+    renderSavedTerms();
+  } else {
+    comingSoonTitle.textContent = page.charAt(0).toUpperCase() + page.slice(1) + " Coming Soon";
+    comingSoonPage.classList.add("active");
+  }
 
   navLinks.forEach(link => {
     link.classList.toggle("active", link.dataset.page === page);
@@ -359,7 +231,8 @@ function renderTerms() {
     termsGrid.appendChild(card);
   });
 }
-  function renderSavedTerms() {
+
+function renderSavedTerms() {
   savedTermsGrid.innerHTML = "";
 
   const savedItems = cyberTerms.filter(item => savedTerms.includes(item.term));
@@ -395,8 +268,10 @@ function renderTerms() {
     savedTermsGrid.appendChild(card);
   });
 }
+
 function openTermModal(item) {
   selectedTerm = item;
+
   modalCategory.textContent = `${item.category} • ${item.level}`;
   modalTerm.textContent = item.term;
   modalSimple.textContent = item.simpleMeaning;
@@ -416,8 +291,8 @@ function openTermModal(item) {
     span.textContent = term;
     modalRelated.appendChild(span);
   });
+
   updateModalSaveButton();
-  
   termModal.classList.add("show");
 }
 
@@ -485,9 +360,12 @@ termModal.addEventListener("click", event => {
     termModal.classList.remove("show");
   }
 });
+
 modalSaveBtn.addEventListener("click", () => {
   if (selectedTerm) {
     toggleSaveTerm(selectedTerm.term);
   }
 });
+
 renderTerms();
+renderSavedTerms();
